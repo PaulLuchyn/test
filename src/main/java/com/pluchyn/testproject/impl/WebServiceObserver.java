@@ -24,23 +24,23 @@ public class WebServiceObserver implements Observer {
     @Override
     public void notifyServiceWorking(String host, String port) {
         //Here must be some important logic which will change observer's state
-        logger.info("Report from "+name+":Service " + host + " on port: " + port + " is working");
+        logger.info("Report from " + name + ":Service " + host + " on port: " + port + " is working");
     }
 
     @Override
     public void notifyServiceNotWorking(String host, String port) {
         //Here must be some important logic which will change observer's state
-        logger.info("Report from "+name+":Service " + host + " on port: " + port + " is not working");
+        logger.info("Report from " + name + ":Service " + host + " on port: " + port + " is not working");
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null){
+        if (obj == null) {
             return false;
         }
         if (!(obj instanceof WebServiceObserver)) {
             return false;
         }
-        return this.name.equals(((WebServiceObserver)obj).name);
+        return this.name.equals(((WebServiceObserver) obj).name);
     }
 }
