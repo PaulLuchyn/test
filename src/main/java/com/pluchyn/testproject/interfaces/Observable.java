@@ -6,7 +6,7 @@ public interface Observable {
 
     void removeObserver(Observer o);
 
-    boolean checkState();
-
     void notifyObservers(boolean state);
+
+    void notifyObserver(Observer o, boolean state);
 }

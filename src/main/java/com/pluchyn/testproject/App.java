@@ -2,11 +2,15 @@ package com.pluchyn.testproject;
 
 import com.pluchyn.testproject.impl.WebService;
 import com.pluchyn.testproject.impl.WebServiceObserver;
+import com.pluchyn.testproject.interfaces.PingService;
+import com.pluchyn.testproject.service.PingServiceImpl;
 import org.apache.log4j.Logger;
 
 public class App {
 
     private final static Logger logger = Logger.getLogger(App.class);
+
+    private final static PingService pingService = new PingServiceImpl();
 
     public static void main(String[] args) {
 
@@ -16,10 +20,9 @@ public class App {
         WebService service = new WebService("localhost","8080");
 
         service.addObserver(serviceObserver);
-        service.addObserver(serviceObserver2);
 
         while(true){
-            service.notifyObservers(service.checkState());
+            service.notifyObserver(serviceObserver,pingService.connect(service, serviceObserver, 60000L));
         }
     }
 }

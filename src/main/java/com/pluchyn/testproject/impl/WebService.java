@@ -43,25 +43,6 @@ public class WebService implements Observable {
     }
 
     @Override
-    public boolean checkState() {
-        String adress = "http://" + host + ":" + port + "/";
-        HttpURLConnection con = null;
-        int responseCode;
-
-        try {
-            URL url = new URL(adress);
-            con = (HttpURLConnection) url.openConnection();
-            responseCode = con.getResponseCode();
-        } catch (IOException e) {
-            //No connection to service, or connection can not be established
-            return false;
-        }
-
-        //If connection is successful - service is working, otherwise - not working
-        return responseCode == 200;
-    }
-
-    @Override
     public void notifyObservers(boolean state) {
         String host = this.host;
         String port = this.port;
@@ -71,6 +52,29 @@ public class WebService implements Observable {
         } else {
             observerList.forEach(o -> o.notifyServiceNotWorking(host, port));
         }
+    }
+
+    @Override
+    public void notifyObserver(Observer o, boolean state) {
+        String host = this.host;
+        String port = this.port;
+
+        if (state) {
+            o.notifyServiceWorking(host, port);
+        } else {
+           o.notifyServiceNotWorking(host, port);
+        }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null){
+            return false;
+        }
+        if (!(obj instanceof WebService)) {
+            return false;
+        }
+        return (this.host.equals(((WebService) obj).getHost()) && this.port.equals(((WebService) obj).getPort()));
     }
 
     //Getters and setters
