@@ -18,10 +18,8 @@ public class Registry {
         return registryEntries.get(0);
     }
 
-    public boolean isEntryExisting(WebService service, WebServiceObserver observer) {
-        RegistryEntry registryEntry = new RegistryEntry();
-        registryEntry.setService(service);
-        registryEntry.setUser(observer);
+    public boolean exists(WebService service, WebServiceObserver observer) {
+        RegistryEntry registryEntry = new RegistryEntry(service,observer);
         for (RegistryEntry entry : registryEntries) {
             if (entry.equals(registryEntry)) {
                 return true;
@@ -31,9 +29,7 @@ public class Registry {
     }
 
     public RegistryEntry findEntryByServiceAndObserver(WebService service, WebServiceObserver observer) {
-        RegistryEntry registryEntry = new RegistryEntry();
-        registryEntry.setService(service);
-        registryEntry.setUser(observer);
+        RegistryEntry registryEntry = new RegistryEntry(service,observer);
         for (RegistryEntry entry : registryEntries) {
             if (entry.equals(registryEntry)) {
                 return entry;

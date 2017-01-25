@@ -15,11 +15,8 @@ public class RegistryEntry {
 
     private Date nextRunAt;
 
-    private Date lastRunAt;
-
     public void updateLastAndNextRunInfo() {
-        lastRunAt = new Date();
-        nextRunAt = new Date(lastRunAt.getTime() + period);
+        nextRunAt = new Date(new Date().getTime() + period);
     }
 
     @Override
@@ -35,6 +32,11 @@ public class RegistryEntry {
 
     //Constructors
     public RegistryEntry(){
+    }
+
+    public RegistryEntry(WebService service, WebServiceObserver observer){
+        this.service = service;
+        this.user = observer;
     }
 
     public RegistryEntry(WebService service, WebServiceObserver observer, Long period){

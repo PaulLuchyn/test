@@ -17,10 +17,10 @@ public class PingServiceImpl implements PingService {
 
     private Registry registry = new Registry();
 
-    private ThreadPoolExecutor wrapper = new ThreadPoolExecutor(2, 50, 600L, TimeUnit.MILLISECONDS, new LinkedBlockingDeque<>(512));
+    private ThreadPoolExecutor wrapper = new ThreadPoolExecutor(2, 50, 600L, TimeUnit.MILLISECONDS, new LinkedBlockingDeque<>(100));
 
     public boolean connect(WebService service, WebServiceObserver user, Long interval) {
-        if (!registry.isEntryExisting(service, user)) {
+        if (!registry.exists(service, user)) {
             registry.addRegistryEntry(new RegistryEntry(service, user, interval));
         }
         String host = service.getHost();
