@@ -1,7 +1,7 @@
-package com.pluchyn.testproject.impl;
+package com.pluchyn.testproject.service.impl;
 
-import com.pluchyn.testproject.interfaces.Observable;
-import com.pluchyn.testproject.interfaces.Observer;
+import com.pluchyn.testproject.service.Observable;
+import com.pluchyn.testproject.service.Observer;
 
 import java.util.ArrayList;
 import java.util.List;

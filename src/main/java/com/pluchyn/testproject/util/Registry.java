@@ -1,7 +1,7 @@
 package com.pluchyn.testproject.util;
 
-import com.pluchyn.testproject.impl.WebService;
-import com.pluchyn.testproject.impl.WebServiceObserver;
+import com.pluchyn.testproject.service.impl.WebService;
+import com.pluchyn.testproject.service.impl.WebServiceObserver;
 
 import java.util.ArrayList;
 import java.util.Date;

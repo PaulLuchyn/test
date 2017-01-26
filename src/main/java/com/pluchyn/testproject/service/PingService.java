@@ -1,7 +1,7 @@
-package com.pluchyn.testproject.interfaces;
+package com.pluchyn.testproject.service;
 
-import com.pluchyn.testproject.impl.WebService;
-import com.pluchyn.testproject.impl.WebServiceObserver;
+import com.pluchyn.testproject.service.impl.WebService;
+import com.pluchyn.testproject.service.impl.WebServiceObserver;
 import com.pluchyn.testproject.util.RegistryEntry;
 
 import java.util.List;

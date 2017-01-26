@@ -1,9 +1,9 @@
 package com.pluchyn.testproject;
 
-import com.pluchyn.testproject.impl.WebService;
-import com.pluchyn.testproject.impl.WebServiceObserver;
-import com.pluchyn.testproject.interfaces.PingService;
-import com.pluchyn.testproject.service.PingServiceImpl;
+import com.pluchyn.testproject.service.impl.WebService;
+import com.pluchyn.testproject.service.impl.WebServiceObserver;
+import com.pluchyn.testproject.service.PingService;
+import com.pluchyn.testproject.service.impl.PingServiceImpl;
 import com.pluchyn.testproject.util.Registry;
 import org.apache.log4j.Logger;
 

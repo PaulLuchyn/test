@@ -1,4 +1,4 @@
-package com.pluchyn.testproject.interfaces;
+package com.pluchyn.testproject.service;
 
 public interface Observable {
 

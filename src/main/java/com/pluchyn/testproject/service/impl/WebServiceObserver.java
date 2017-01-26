@@ -1,7 +1,7 @@
-package com.pluchyn.testproject.impl;
+package com.pluchyn.testproject.service.impl;
 
 import com.pluchyn.testproject.App;
-import com.pluchyn.testproject.interfaces.Observer;
+import com.pluchyn.testproject.service.Observer;
 import org.apache.log4j.Logger;
 
 /**
