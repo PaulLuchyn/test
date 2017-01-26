@@ -3,9 +3,6 @@ package com.pluchyn.testproject.impl;
 import com.pluchyn.testproject.interfaces.Observable;
 import com.pluchyn.testproject.interfaces.Observer;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,6 +20,10 @@ public class WebService implements Observable {
     //Constructors
 
     public WebService() {
+    }
+
+    public WebService(String host) {
+        this.host = host;
     }
 
     public WebService(String host, String port) {
@@ -62,17 +63,20 @@ public class WebService implements Observable {
         if (state) {
             o.notifyServiceWorking(host, port);
         } else {
-           o.notifyServiceNotWorking(host, port);
+            o.notifyServiceNotWorking(host, port);
         }
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null){
+        if (obj == null) {
             return false;
         }
         if (!(obj instanceof WebService)) {
             return false;
+        }
+        if (this.port == null || ((WebService) obj).getPort() == null) {
+            return this.host.equals(((WebService) obj).getHost());
         }
         return (this.host.equals(((WebService) obj).getHost()) && this.port.equals(((WebService) obj).getPort()));
     }

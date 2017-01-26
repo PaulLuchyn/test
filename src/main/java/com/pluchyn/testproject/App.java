@@ -4,7 +4,11 @@ import com.pluchyn.testproject.impl.WebService;
 import com.pluchyn.testproject.impl.WebServiceObserver;
 import com.pluchyn.testproject.interfaces.PingService;
 import com.pluchyn.testproject.service.PingServiceImpl;
+import com.pluchyn.testproject.util.Registry;
 import org.apache.log4j.Logger;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class App {
 
@@ -13,16 +17,33 @@ public class App {
     private final static PingService pingService = new PingServiceImpl();
 
     public static void main(String[] args) {
+        // Preparing data
+        Timer timer = new Timer();
+        Registry registry = new Registry();
 
-        WebServiceObserver serviceObserver = new WebServiceObserver("Paul");
-        WebServiceObserver serviceObserver2 = new WebServiceObserver("Ihor");
+        WebServiceObserver firstObserver = new WebServiceObserver("Paul");
+        WebServiceObserver secondObserver = new WebServiceObserver("Ihor");
 
-        WebService service = new WebService("localhost","8080");
+        WebService localhost = new WebService("localhost", "8080");
+        WebService google = new WebService("google.com", null);
+        WebService stackoverflow = new WebService("stackoverflow.com", null);
 
-        service.addObserver(serviceObserver);
+        registry.addRegistryEntry(firstObserver, localhost, 10000L);
+        registry.addRegistryEntry(firstObserver, google, 1000L);
+        registry.addRegistryEntry(secondObserver, stackoverflow, 60000L);
 
-        while(true){
-            service.notifyObserver(serviceObserver,pingService.connect(service, serviceObserver, 60000L));
-        }
+        ((PingServiceImpl) pingService).setRegistry(registry);
+
+        /*
+         * Scheduling task to do lookup from registry.
+         * Zero delay means that lookup is starting immediately after application starts.
+         * Period "10000" means that lookup will be performed every tem seconds.
+         */
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                pingService.checkConnection(registry.lookup());
+            }
+        }, 0, 10000);
     }
 }

@@ -15,7 +15,7 @@ public class RegistryEntry {
 
     private Date nextRunAt;
 
-    public void updateLastAndNextRunInfo() {
+    public void updateNextRunInfo() {
         nextRunAt = new Date(new Date().getTime() + period);
     }
 
@@ -31,6 +31,7 @@ public class RegistryEntry {
     }
 
     //Constructors
+
     public RegistryEntry(){
     }
 
